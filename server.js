@@ -3,10 +3,10 @@
 // ===============================================
 
 // 1. Вставте сюди токен вашого Telegram-бота (отримати у @BotFather)
-const TELEGRAM_BOT_TOKEN = '8523330601:AAFbMsEING_qYo3xSsovK6Co1VN3lOcsfs0';
+const TELEGRAM_BOT_TOKEN = '8535014130:AAGHrjXxPweBreFDlt2oJkd596aLTKwRSeE';
 
 // 2. Вставте сюди ваш числовий Chat ID (отримати у @userinfobot)
-const ADMIN_CHAT_ID = '-5095318115';
+const ADMIN_CHAT_ID = '-5095349969';
 
 // ===============================================
 
